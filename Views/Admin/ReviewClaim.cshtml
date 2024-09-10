@@ -1,4 +1,4 @@
-﻿@model YourNamespace.Models.Claim
+﻿@model ST10298613_PROG6212_POE.Models.Claim
 
 @{
     ViewData["Title"] = "Review Claim";
@@ -8,16 +8,16 @@
 
 <p><strong>Lecturer:</strong> @Model.Lecturer.Name</p>
 <p><strong>Hours Worked:</strong> @Model.HoursWorked</p>
-<p><strong>Rate per Hour:</strong> @Model.RatePerHour</p>
+<p><strong>Rate per Hour:</strong> @Model.Lecturer.HourlyRate</p>
 <p><strong>Total Amount:</strong> @Model.TotalAmount</p>
-<p><strong>Date Submitted:</strong> @Model.SubmissionDate</p>
+<p><strong>Date Submitted:</strong> @Model.SubmissionDate.ToShortDateString()</p>
 
 <form asp-action="ApproveClaim" method="post">
-    <input type="hidden" name="ClaimId" value="@Model.Id" />
+    <input type="hidden" name="ClaimId" value="@Model.ClaimID" />
     <button type="submit" class="btn btn-success">Approve</button>
 </form>
 
 <form asp-action="RejectClaim" method="post">
-    <input type="hidden" name="ClaimId" value="@Model.Id" />
+    <input type="hidden" name="ClaimId" value="@Model.ClaimID" />
     <button type="submit" class="btn btn-danger">Reject</button>
 </form>

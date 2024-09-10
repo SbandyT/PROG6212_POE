@@ -9,5 +9,6 @@
         public decimal TotalAmount => HoursWorked * Lecturer.HourlyRate;  // Auto-calculated
         public string Status { get; set; } = "Pending"; // Pending, Approved, Settled
         public SupportingDocument Document { get; set; }
+        public DateTime SubmissionDate { get; set; } // Added for view
     }
 }
