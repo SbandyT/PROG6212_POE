@@ -14,28 +14,21 @@ namespace ST10298613_PROG6212_POE.Controllers
         }
 
         // Home page
-        public IActionResult Index()
+        public IActionResult Dashboard()
         {
-            return View();
+            return View(); // This will return Views/Home/Dashboard.cshtml
         }
 
-        // Privacy policy page (optional)
-        public IActionResult Privacy()
+        public IActionResult About()
         {
-            return View();
+            return View(); // This will return Views/Home/About.cshtml
         }
 
-        // Navigation to Lecturer Dashboard
-        public IActionResult Lecturer()
+        public IActionResult PrivacyPolicy()
         {
-            return RedirectToAction("Index", "Lecturer");
+            return View(); // This will return Views/Home/PrivacyPolicy.cshtml
         }
 
-        // Navigation to Admin Dashboard
-        public IActionResult Admin()
-        {
-            return RedirectToAction("Index", "Admin");
-        }
 
         // Error handler
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

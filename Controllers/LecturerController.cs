@@ -15,29 +15,19 @@ namespace ST10298613_PROG6212_POE.Controllers
         }
 
         // View the list of claims
-        public IActionResult Index()
+        public IActionResult Dashboard()
         {
-            var lecturers = _context.Lecturers.ToList();
-            return View(lecturers);
+            return View(); // This will return Views/Lecturer/Dashboard.cshtml
         }
 
-        // Submit a claim
-        [HttpGet]
-        public IActionResult SubmitClaim()
+        public IActionResult ClaimForm()
         {
-            return View();
+            return View(); // This will return Views/Lecturer/ClaimForm.cshtml
         }
 
-        [HttpPost]
-        public IActionResult SubmitClaim(Claim claim)
+        public IActionResult ClaimHistory()
         {
-            if (ModelState.IsValid)
-            {
-                _context.Claims.Add(claim);
-                _context.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(claim);
+            return View(); // This will return Views/Lecturer/ClaimHistory.cshtml
         }
     }
 }

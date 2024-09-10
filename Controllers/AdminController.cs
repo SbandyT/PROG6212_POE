@@ -43,5 +43,22 @@ namespace ST10298613_PROG6212_POE.Controllers
             }
             return RedirectToAction("Index");
         }
+        public IActionResult Dashboard()
+        {
+            return View(); // This will return Views/Admin/Dashboard.cshtml
+        }
+
+        public IActionResult ReviewClaim(int id)
+        {
+            var claim = _context.Claims.Find(id);
+            return View(claim); // This will return Views/Admin/ReviewClaim.cshtml
+        }
+
+        public IActionResult ManageLecturers()
+        {
+            var lecturers = _context.Lecturers.ToList();
+            return View(lecturers); // This will return Views/Admin/ManageLecturers.cshtml
+        }
+
     }
 }
