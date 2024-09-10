@@ -1,0 +1,23 @@
+﻿@model YourNamespace.Models.Claim
+
+@{
+    ViewData["Title"] = "Review Claim";
+}
+
+<h1>Review Claim</h1>
+
+<p><strong>Lecturer:</strong> @Model.Lecturer.Name</p>
+<p><strong>Hours Worked:</strong> @Model.HoursWorked</p>
+<p><strong>Rate per Hour:</strong> @Model.RatePerHour</p>
+<p><strong>Total Amount:</strong> @Model.TotalAmount</p>
+<p><strong>Date Submitted:</strong> @Model.SubmissionDate</p>
+
+<form asp-action="ApproveClaim" method="post">
+    <input type="hidden" name="ClaimId" value="@Model.Id" />
+    <button type="submit" class="btn btn-success">Approve</button>
+</form>
+
+<form asp-action="RejectClaim" method="post">
+    <input type="hidden" name="ClaimId" value="@Model.Id" />
+    <button type="submit" class="btn btn-danger">Reject</button>
+</form>

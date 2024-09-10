@@ -1,0 +1,36 @@
+﻿@{
+    ViewData["Title"] = "Admin Dashboard";
+}
+
+<h1>Admin Dashboard</h1>
+
+<p>Welcome, admin! Below are the pending claims for your review:</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Claim ID</th>
+            <th>Lecturer</th>
+            <th>Total Amount</th>
+            <th>Date Submitted</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var claim in Model)
+        {
+            <tr>
+                <td>@claim.Id</td>
+                <td>@claim.Lecturer.Name</td>
+                <td>@claim.TotalAmount</td>
+                <td>@claim.SubmissionDate</td>
+                <td>@claim.Status</td>
+                <td>
+                    <a asp-action="ReviewClaim" asp-route-id="@claim.Id" class="btn btn-info">Review</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

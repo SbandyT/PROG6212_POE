@@ -1,0 +1,22 @@
+﻿@{
+    ViewData["Title"] = "Submit a Claim";
+}
+
+<h1>Submit a Claim</h1>
+
+<form asp-action="SubmitClaim" method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <label for="hoursWorked">Hours Worked</label>
+        <input type="number" class="form-control" id="hoursWorked" name="hoursWorked" required />
+    </div>
+    <div class="form-group">
+        <label for="ratePerHour">Rate per Hour</label>
+        <input type="number" class="form-control" id="ratePerHour" name="ratePerHour" required />
+    </div>
+    <div class="form-group">
+        <label for="supportingDocuments">Supporting Documents</label>
+        <input type="file" class="form-control" id="supportingDocuments" name="supportingDocuments" required />
+    </div>
+    <button type="submit" class="btn btn-primary">Submit Claim</button>
+</form>
+

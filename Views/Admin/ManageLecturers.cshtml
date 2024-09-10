@@ -1,0 +1,31 @@
+﻿@{
+    ViewData["Title"] = "Manage Lecturers";
+}
+
+<h1>Manage Lecturers</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Lecturer ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var lecturer in Model)
+        {
+            <tr>
+                <td>@lecturer.Id</td>
+                <td>@lecturer.Name</td>
+                <td>@lecturer.Email</td>
+                <td>
+                    <a asp-action="EditLecturer" asp-route-id="@lecturer.Id" class="btn btn-primary">Edit</a>
+                    <a asp-action="DeleteLecturer" asp-route-id="@lecturer.Id" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
