@@ -8,6 +8,9 @@ namespace ST10298613_PROG6212_POE
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            
+                
+
 
             var app = builder.Build();
 
