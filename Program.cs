@@ -1,3 +1,6 @@
+using ST10298613_PROG6212_POE.Data;
+using Microsoft.EntityFrameworkCore;
+
 namespace ST10298613_PROG6212_POE
 {
     public class Program
@@ -9,10 +12,10 @@ namespace ST10298613_PROG6212_POE
             // Add services to the container.
             builder.Services.AddControllersWithViews();
             
-                
 
 
-            var app = builder.Build();
+
+           var app = builder.Build();
 
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())

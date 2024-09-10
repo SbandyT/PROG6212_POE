@@ -1,0 +1,27 @@
+﻿@model IEnumerable<ST10298613_PROG6212_POE.Models.Lecturer>
+
+<h2>Lecturer Dashboard</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Lecturer Name</th>
+            <th>Email</th>
+            <th>Hourly Rate</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var lecturer in Model)
+        {
+            <tr>
+                <td>@lecturer.Name</td>
+                <td>@lecturer.Email</td>
+                <td>@lecturer.HourlyRate</td>
+                <td>
+                    <a asp-action="SubmitClaim">Submit Claim</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

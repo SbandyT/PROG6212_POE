@@ -1,0 +1,22 @@
+﻿@model ST10298613_PROG6212_POE.Models.Claim
+
+<h2>Submit Claim</h2>
+
+<form asp-action="SubmitClaim" method="post" enctype="multipart/form-data">
+    <div>
+        <label>Lecturer ID</label>
+        <input asp-for="LecturerID" class="form-control" />
+    </div>
+    <div>
+        <label>Hours Worked</label>
+        <input asp-for="HoursWorked" class="form-control" />
+    </div>
+    <div>
+        <label>Upload Supporting Document</label>
+        <input type="file" asp-for="Document.FilePath" class="form-control" />
+    </div>
+    <div>
+        <input type="submit" value="Submit Claim" class="btn btn-primary" />
+    </div>
+</form>
+
