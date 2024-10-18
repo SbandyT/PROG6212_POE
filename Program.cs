@@ -35,6 +35,7 @@ namespace ST10298613_PROG6212_POE
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
+          
 
             app.Run();
         }

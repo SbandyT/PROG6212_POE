@@ -29,5 +29,42 @@ namespace ST10298613_PROG6212_POE.Controllers
         {
             return View(); // This will return Views/Lecturer/ClaimHistory.cshtml
         }
+        [HttpPost]
+        public IActionResult SubmitClaim(Claim claim, IFormFile supportingDocument)
+        {
+            if (ModelState.IsValid)
+            {
+                // Save the claim details to the database
+                _context.Claims.Add(claim);
+                _context.SaveChanges();
+
+                // Handle file upload if there's a supporting document
+                if (supportingDocument != null)
+                {
+                    var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/uploads", supportingDocument.FileName);
+
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        supportingDocument.CopyTo(stream);
+                    }
+
+                    // Link the document to the claim
+                    var document = new SupportingDocument
+                    {
+                        ClaimId = claim.Id,
+                        FileName = supportingDocument.FileName,
+                        FilePath = filePath
+                    };
+
+                    _context.SupportingDocuments.Add(document);
+                    _context.SaveChanges();
+                }
+
+                return RedirectToAction("ClaimHistory");
+            }
+
+            return View("ClaimForm", claim);
+        }
+
     }
 }
