@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using ST10298613_PROG6212_POE.Data;
-using ST10298613_PROG6212_POE.Models;
-using System.Linq;
+using Microsoft.EntityFrameworkCore;  
+using ST10298613_PROG6212_POE.Data;  
+using ST10298613_PROG6212_POE.Models;  
+
 
 namespace ST10298613_PROG6212_POE.Controllers
 {

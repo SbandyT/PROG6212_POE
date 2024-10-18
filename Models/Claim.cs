@@ -2,13 +2,25 @@
 {
     public class Claim
     {
-        public int ClaimID { get; set; }
-        public int LecturerID { get; set; }
+        public int Id { get; set; }
+        public int LecturerId { get; set; }
         public Lecturer Lecturer { get; set; }
         public decimal HoursWorked { get; set; }
-        public decimal TotalAmount => HoursWorked * Lecturer.HourlyRate;  // Auto-calculated
-        public string Status { get; set; } = "Pending"; // Pending, Approved, Settled
-        public SupportingDocument Document { get; set; }
-        public DateTime SubmissionDate { get; set; } // Added for view
+        public decimal HourlyRate { get; set; }
+        public string Notes { get; set; }
+        public string Status { get; set; } = "Pending";
+
+        // Calculated property for Total Amount
+        public decimal TotalAmount
+        {
+            get
+            {
+                return HoursWorked * HourlyRate;
+            }
+        }
+        // New property for the submission date
+        public DateTime SubmissionDate { get; set; } = DateTime.Now;
+
+        
     }
 }

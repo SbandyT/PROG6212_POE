@@ -9,25 +9,31 @@
 <table class="table">
     <thead>
         <tr>
-            <th>Claim ID</th>
-            <th>Lecturer</th>
-            <th>Total Amount</th>
-            <th>Date Submitted</th>
+            <th>Lecturer Name</th>
+            <th>Hours Worked</th>
+            <th>Hourly Rate</th>
             <th>Status</th>
-            <th>Action</th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var claim in Model)
         {
             <tr>
-                <td>@claim.Id</td>
                 <td>@claim.Lecturer.Name</td>
-                <td>@claim.TotalAmount</td>
-                <td>@claim.SubmissionDate</td>
+                <td>@claim.HoursWorked</td>
+                <td>@claim.HourlyRate</td>
                 <td>@claim.Status</td>
                 <td>
-                    <a asp-action="ReviewClaim" asp-route-id="@claim.Id" class="btn btn-info">Review</a>
+                    <form asp-action="ApproveClaim" method="post">
+                        <input type="hidden" name="claimID" value="@claim.Id" />
+                        <button type="submit" class="btn btn-success">Approve</button>
+                    </form>
+
+                    <form asp-action="RejectClaim" method="post">
+                        <input type="hidden" name="claimID" value="@claim.Id" />
+                        <button type="submit" class="btn btn-danger">Reject</button>
+                    </form>
                 </td>
             </tr>
         }

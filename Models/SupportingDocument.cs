@@ -2,9 +2,11 @@
 {
     public class SupportingDocument
     {
-        public int DocumentID { get; set; }
-        public int ClaimID { get; set; }
+        public int Id { get; set; }
+        public int ClaimId { get; set; }
         public Claim Claim { get; set; }
-        public string FilePath { get; set; } // Path to the uploaded document
+        public string FileName { get; set; }
+        public string FilePath { get; set; }
     }
+
 }
