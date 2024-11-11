@@ -15,6 +15,11 @@ namespace ST10298613_PROG6212_POE.Controllers
         {
             _logger = logger;
         }
+        public IActionResult Index()
+        {
+            return View("Dashboard"); 
+        }
+
 
         // Home page
         public IActionResult Dashboard()

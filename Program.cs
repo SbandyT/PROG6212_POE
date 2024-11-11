@@ -35,9 +35,18 @@ namespace ST10298613_PROG6212_POE
             app.UseAuthorization();
 
             app.MapControllerRoute(
-                name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
-          
+            name: "default",
+            pattern: "{controller=Home}/{action=Dashboard}/{id?}");
+            app.MapControllerRoute(
+            name: "lecturer",
+            pattern: "Lecturer/{action=Dashboard}/{id?}",
+            defaults: new { controller = "Lecturer" });
+
+            app.MapControllerRoute(
+                name: "admin",
+                pattern: "Admin/{action=Dashboard}/{id?}",
+                defaults: new { controller = "Admin" });
+
 
             app.Run();
         }

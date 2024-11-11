@@ -16,11 +16,7 @@ namespace ST10298613_PROG6212_POE.Controllers
         }
 
         // View all claims (for Programme Coordinators/Academic Managers)
-        public IActionResult Index()
-        {
-            var claims = _context.Claims.ToList();
-            return View(claims);
-        }
+       
 
         // Approve or reject claim
         [HttpPost]
@@ -48,8 +44,10 @@ namespace ST10298613_PROG6212_POE.Controllers
         }
         public IActionResult Dashboard()
         {
-            return View(); // This will return Views/Admin/Dashboard.cshtml
+            var claims = _context.Claims.ToList(); // Ensure this line retrieves claims from the database
+            return View(claims); // Pass the list of claims to the view
         }
+
 
         public IActionResult ReviewClaim(int id)
         {

@@ -28,7 +28,9 @@ namespace ST10298613_PROG6212_POE.Controllers
 
         public IActionResult ClaimHistory()
         {
-            return View(); // This will return Views/Lecturer/ClaimHistory.cshtml
+            var claims = _context.Claims.ToList(); // Retrieve claims from the database
+            
+            return View(claims);
         }
         [HttpPost]
         public IActionResult SubmitClaim(Claim claim, IFormFile supportingDocument)
