@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;  
-using ST10298613_PROG6212_POE.Data;  
-using ST10298613_PROG6212_POE.Models;  
-
+using Microsoft.EntityFrameworkCore;
+using ST10298613_PROG6212_POE.Data;
+using ST10298613_PROG6212_POE.Models;
+using System.IO;
 
 namespace ST10298613_PROG6212_POE.Controllers
 {
@@ -28,10 +28,10 @@ namespace ST10298613_PROG6212_POE.Controllers
 
         public IActionResult ClaimHistory()
         {
-            var claims = _context.Claims.ToList(); // Retrieve claims from the database
-            
-            return View(claims);
+            var claims = _context.Claims.Include(c => c.Lecturer).ToList();
+            return View(claims);  // Pass claims to the view
         }
+
         [HttpPost]
         public IActionResult SubmitClaim(Claim claim, IFormFile supportingDocument)
         {
@@ -44,7 +44,8 @@ namespace ST10298613_PROG6212_POE.Controllers
                 // Handle file upload if there's a supporting document
                 if (supportingDocument != null)
                 {
-                    var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/uploads", supportingDocument.FileName);
+                    var uniqueFileName = $"{Guid.NewGuid()}_{supportingDocument.FileName}";
+                    var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/uploads", uniqueFileName);
 
                     using (var stream = new FileStream(filePath, FileMode.Create))
                     {
@@ -55,7 +56,7 @@ namespace ST10298613_PROG6212_POE.Controllers
                     var document = new SupportingDocument
                     {
                         ClaimId = claim.Id,
-                        FileName = supportingDocument.FileName,
+                        FileName = uniqueFileName,
                         FilePath = filePath
                     };
 
@@ -68,6 +69,5 @@ namespace ST10298613_PROG6212_POE.Controllers
 
             return View("ClaimForm", claim);
         }
-
     }
 }
