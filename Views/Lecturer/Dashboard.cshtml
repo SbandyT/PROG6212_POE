@@ -10,4 +10,26 @@
 <div>
     <a asp-action="ClaimForm" class="btn btn-primary">Submit a New Claim</a>
     <a asp-action="ClaimHistory" class="btn btn-secondary">View Claim History</a>
+    id="claimStatusUpdates">
+    <h3>Claim Status Updates</h3>
+    <ul id="statusList"></ul>
 </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/5.0.11/signalr.min.js"></script>
+<script type="text/javascript">
+    const connection = new signalR.HubConnectionBuilder()
+        .withUrl("/claimStatusHub")
+        .build();
+
+    connection.on("ReceiveStatusUpdate", function (claimId, newStatus) {
+        // Update the claim status in the UI
+        const claimRow = document.getElementById("claim-" + claimId);
+        if (claimRow) {
+            claimRow.querySelector(".status").textContent = newStatus;
+        }
+    });
+
+    connection.start().catch(function (err) {
+        return console.error(err.toString());
+    });
+</script>

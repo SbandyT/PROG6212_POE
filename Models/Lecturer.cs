@@ -10,6 +10,7 @@ namespace ST10298613_PROG6212_POE.Models
         [Column(TypeName = "decimal(18, 2)")]
         public decimal HourlyRate { get; set; }
         public ICollection<Claim> Claims { get; set; }
-        
+        // this property to link with the user identity
+        public string UserId { get; set; }
     }
 }

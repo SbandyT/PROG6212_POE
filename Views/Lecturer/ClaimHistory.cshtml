@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Claim>
+﻿@model IEnumerable<ST10298613_PROG6212_POE.Models.Claim>
 
 @{
     ViewData["Title"] = "Claim History";
@@ -20,11 +20,13 @@
         @foreach (var claim in Model)
         {
             <tr>
+                <td>@claim.Lecturer.Name</td>
                 <td>@claim.Id</td>
                 <td>@claim.HoursWorked</td>
                 <td>@claim.TotalAmount</td>
                 <td>@claim.Status</td>
                 <td>@claim.SubmissionDate</td>
+                <td class="status">@claim.Status</td>
             </tr>
         }
     </tbody>
