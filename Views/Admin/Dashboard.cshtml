@@ -1,44 +1,45 @@
 ﻿@model IEnumerable<ST10298613_PROG6212_POE.Models.Claim>
-@{
-    ViewData["Title"] = "Admin Dashboard";
-}
 
 <h1>Admin Dashboard</h1>
-
 
 <p>Welcome, admin! Below are the pending claims for your review:</p>
 
 <table class="table">
     <thead>
-        <tr>
-            <th>Lecturer Name</th>
-            <th>Hours Worked</th>
-            <th>Hourly Rate</th>
-            <th>Status</th>
-            <th>Actions</th>
-        </tr>
+    <tr>
+        <th>Lecturer Name</th>
+        <th>Hours Worked</th>
+        <th>Hourly Rate</th>
+        <th>Status</th>
+        <th>Actions</th>
+    </tr>
     </thead>
     <tbody>
-        @foreach (var claim in Model)
-        {
-            <tr>
-                <td>@claim.Lecturer.Name</td>
-                <td>@claim.HoursWorked</td>
-                <td>@claim.HourlyRate</td>
-                <td>@claim.Status</td>
-                <td>
-                    <form asp-action="ApproveClaim" method="post">
-                        <input type="hidden" name="claimID" value="@claim.Id" />
-                        <button type="submit" class="btn btn-success">Approve</button>
+    @foreach (var claim in Model)
+    {
+        <tr>
+            <td>@claim.Lecturer.Name</td>
+            <td>@claim.HoursWorked</td>
+            <td>@claim.HourlyRate</td>
+            <td>@claim.Status</td>
+            <td>
+                @if (claim.Status == "Pending")
+                {
+                    <form asp-action="ApproveClaim" method="post" style="display:inline-block;">
+                        <input type="hidden" name="claimId" value="@claim.Id" />
+                        <button class="btn btn-success">Approve</button>
                     </form>
-
-                    <form asp-action="RejectClaim" method="post">
-                        <input type="hidden" name="claimID" value="@claim.Id" />
-                        <button type="submit" class="btn btn-danger">Reject</button>
+                    <form asp-action="RejectClaim" method="post" style="display:inline-block;">
+                        <input type="hidden" name="claimId" value="@claim.Id" />
+                        <button class="btn btn-danger">Reject</button>
                     </form>
-                </td>
-            </tr>
-        }
+                }
+                else
+                {
+                    <span>@claim.Status</span>
+                }
+            </td>
+        </tr>
+    }
     </tbody>
 </table>
-

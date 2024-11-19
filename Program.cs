@@ -1,7 +1,7 @@
 using ST10298613_PROG6212_POE.Data;
 using Microsoft.EntityFrameworkCore;
 using ST10298613_PROG6212_POE.NewFolder;
-using Microsoft.AspNetCore.SignalR;
+
 namespace ST10298613_PROG6212_POE
 {
     public class Program

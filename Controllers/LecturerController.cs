@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 using ST10298613_PROG6212_POE.Data;
 using ST10298613_PROG6212_POE.Models;
@@ -8,8 +9,9 @@ namespace ST10298613_PROG6212_POE.Controllers
 {
     public class LecturerController(ApplicationDbContext context, IHubContext<ClaimStatusHub> hubContext) : Controller
     {
+        public ApplicationDbContext Context { get; } = context;
+        public IHubContext<ClaimStatusHub> HubContext { get; } = hubContext;
         private readonly ApplicationDbContext _context = context;
-        private readonly IHubContext<ClaimStatusHub> _hubContext = hubContext;
 
         // View the list of claims
         public IActionResult Dashboard()
@@ -19,7 +21,7 @@ namespace ST10298613_PROG6212_POE.Controllers
 
         public IActionResult ClaimForm()
         {
-            var model = new ST10298613_PROG6212_POE.Models.Claim();
+            var model = new Claim();
             return View(model);
         }
 
@@ -30,7 +32,7 @@ namespace ST10298613_PROG6212_POE.Controllers
         }
 
         [HttpPost]
-        public IActionResult SubmitClaim(ST10298613_PROG6212_POE.Models.Claim claim, IFormFile supportingDocument)
+        public IActionResult SubmitClaim(Claim claim, IFormFile? supportingDocument)
         {
             if (ModelState.IsValid)
             {
@@ -41,12 +43,16 @@ namespace ST10298613_PROG6212_POE.Controllers
                     return View("ClaimForm", claim);
                 }
 
+                claim.LecturerId = lecturer.LecturerID;
+                claim.Status = "Pending"; // Ensure status is set to pending on submission
+
                 _context.Claims.Add(claim);
                 _context.SaveChanges();
 
                 // Handle file upload if there's a supporting document
                 if (supportingDocument != null)
                 {
+                    // File upload handling (make sure the file path is correctly saved in the SupportingDocuments table)
                     var allowedFileTypes = new[] { ".pdf", ".docx", ".xlsx" };
                     var fileExtension = Path.GetExtension(supportingDocument.FileName).ToLower();
                     var maxFileSize = 5 * 1024 * 1024; // 5 MB
@@ -88,5 +94,6 @@ namespace ST10298613_PROG6212_POE.Controllers
 
             return View("ClaimForm", claim);
         }
+
     }
 }

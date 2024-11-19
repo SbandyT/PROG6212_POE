@@ -23,31 +23,27 @@ namespace ST10298613_PROG6212_POE.Controllers
 
         // Approve or reject claim
         [HttpPost]
-        public async Task<IActionResult> ApproveClaim(int claimID)
+        public async Task<IActionResult> ApproveClaim(int claimId)
         {
-            var claim = _context.Claims.Find(claimID);
+            var claim = _context.Claims.Find(claimId);
             if (claim != null)
             {
                 claim.Status = "Approved";
-                _context.SaveChanges();
-
-                // Notify clients about the status update
-                await _hubContext.Clients.All.SendAsync("ReceiveStatusUpdate", claim.Id, claim.Status);
+                await _context.SaveChangesAsync();
+                await _hubContext.Clients.All.SendAsync("ReceiveStatusUpdate", claimId, "Approved");
             }
             return RedirectToAction("Dashboard");
         }
 
         [HttpPost]
-        public async Task<IActionResult> RejectClaim(int claimID)
+        public async Task<IActionResult> RejectClaim(int claimId)
         {
-            var claim = _context.Claims.Find(claimID);
+            var claim = _context.Claims.Find(claimId);
             if (claim != null)
             {
                 claim.Status = "Rejected";
-                _context.SaveChanges();
-
-                // Notify clients about the status update
-                await _hubContext.Clients.All.SendAsync("ReceiveStatusUpdate", claim.Id, claim.Status);
+                await _context.SaveChangesAsync();
+                await _hubContext.Clients.All.SendAsync("ReceiveStatusUpdate", claimId, "Rejected");
             }
             return RedirectToAction("Dashboard");
         }

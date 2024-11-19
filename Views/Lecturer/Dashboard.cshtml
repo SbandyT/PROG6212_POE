@@ -21,15 +21,12 @@
         .withUrl("/claimStatusHub")
         .build();
 
-    connection.on("ReceiveStatusUpdate", function (claimId, newStatus) {
-        // Update the claim status in the UI
-        const claimRow = document.getElementById("claim-" + claimId);
-        if (claimRow) {
-            claimRow.querySelector(".status").textContent = newStatus;
+    connection.on("ReceiveStatusUpdate", (claimId, status) => {
+        const row = document.getElementById(`status-${claimId}`);
+        if (row) {
+            row.innerText = status;
         }
     });
 
-    connection.start().catch(function (err) {
-        return console.error(err.toString());
-    });
+    connection.start().catch(err => console.error(err.toString()));
 </script>
