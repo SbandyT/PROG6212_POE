@@ -2,20 +2,14 @@
 using Microsoft.EntityFrameworkCore;
 using ST10298613_PROG6212_POE.Data;
 using ST10298613_PROG6212_POE.Models;
-using System.IO;
-using System.Security.Claims;
-using Claim = ST10298613_PROG6212_POE.Models.Claim;
+using ST10298613_PROG6212_POE.NewFolder;
 
 namespace ST10298613_PROG6212_POE.Controllers
 {
-    public class LecturerController : Controller
+    public class LecturerController(ApplicationDbContext context, IHubContext<ClaimStatusHub> hubContext) : Controller
     {
-        private readonly ApplicationDbContext _context;
-
-        public LecturerController(ApplicationDbContext context)
-        {
-            _context = context;
-        }
+        private readonly ApplicationDbContext _context = context;
+        private readonly IHubContext<ClaimStatusHub> _hubContext = hubContext;
 
         // View the list of claims
         public IActionResult Dashboard()
