@@ -1,24 +1,26 @@
-﻿@model ST10298613_PROG6212_POE.Models.Claim
-
-@{
-    ViewData["Title"] = "Review Claim";
-}
-
-<h1>Review Claim</h1>
-
-
-<p><strong>Lecturer:</strong> @Model.Lecturer.Name</p>
-<p><strong>Hours Worked:</strong> @Model.HoursWorked</p>
-<p><strong>Rate per Hour:</strong> @Model.Lecturer.HourlyRate</p>
-<p><strong>Total Amount:</strong> @Model.TotalAmount</p>
-<p><strong>Date Submitted:</strong> @Model.SubmissionDate.ToShortDateString()</p>
-
-<form asp-action="ApproveClaim" method="post">
-    <input type="hidden" name="ClaimId" value="@Model.Id" />
-    <button type="submit" class="btn btn-success">Approve</button>
-</form>
-
-<form asp-action="RejectClaim" method="post">
-    <input type="hidden" name="ClaimId" value="@Model.Id" />
-    <button type="submit" class="btn btn-danger">Reject</button>
-</form>
+﻿<h1>Review Claims</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Claim ID</th>
+            <th>Lecturer</th>
+            <th>Hours Worked</th>
+            <th>Hourly Rate</th>
+            <th>Total Payment</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var claim in Model)
+        {
+            <tr>
+                <td>@claim.Id</td>
+                <td>@claim.LecturerName</td>
+                <td>@claim.HoursWorked</td>
+                <td>@claim.HourlyRate</td>
+                <td>@claim.TotalPayment</td>
+                <td>@claim.Status</td>
+            </tr>
+        }
+    </tbody>
+</table>

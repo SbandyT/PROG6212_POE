@@ -26,6 +26,8 @@ namespace ST10298613_PROG6212_POE
             .AddEntityFrameworkStores<ApplicationDbContext>();
 
             builder.Services.AddControllersWithViews();
+            SeedRolesAndAdminUser(app.Services);
+
 
             var app = builder.Build();
 

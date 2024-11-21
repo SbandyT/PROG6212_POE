@@ -2,44 +2,6 @@
 
 <h1>Admin Dashboard</h1>
 
-<p>Welcome, admin! Below are the pending claims for your review:</p>
-
-<table class="table">
-    <thead>
-    <tr>
-        <th>Lecturer Name</th>
-        <th>Hours Worked</th>
-        <th>Hourly Rate</th>
-        <th>Status</th>
-        <th>Actions</th>
-    </tr>
-    </thead>
-    <tbody>
-    @foreach (var claim in Model)
-    {
-        <tr>
-            <td>@claim.Lecturer.Name</td>
-            <td>@claim.HoursWorked</td>
-            <td>@claim.HourlyRate</td>
-            <td>@claim.Status</td>
-            <td>
-                @if (claim.Status == "Pending")
-                {
-                    <form asp-action="ApproveClaim" method="post" style="display:inline-block;">
-                        <input type="hidden" name="claimId" value="@claim.Id" />
-                        <button class="btn btn-success">Approve</button>
-                    </form>
-                    <form asp-action="RejectClaim" method="post" style="display:inline-block;">
-                        <input type="hidden" name="claimId" value="@claim.Id" />
-                        <button class="btn btn-danger">Reject</button>
-                    </form>
-                }
-                else
-                {
-                    <span>@claim.Status</span>
-                }
-            </td>
-        </tr>
-    }
-    </tbody>
-</table>
+<h1>Admin Dashboard</h1>
+<a asp-controller="Admin" asp-action="ManageLecturers" class="btn btn-primary">Manage Lecturers</a>
+<a asp-controller="Admin" asp-action="ReviewClaim" class="btn btn-warning">Review Claims</a>

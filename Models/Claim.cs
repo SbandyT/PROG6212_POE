@@ -1,32 +1,20 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using Xunit.Sdk;
 
 namespace ST10298613_PROG6212_POE.Models
 {
+
+
     public class Claim
     {
         public int Id { get; set; }
-        public int LecturerId { get; set; }
-        public Lecturer Lecturer { get; set; }
-
-        [Column(TypeName = "decimal(18, 2)")]
-        public decimal HoursWorked { get; set; }
-
-        [Column(TypeName = "decimal(18, 2)")]
+        public string LecturerName { get; set; }
+        public int HoursWorked { get; set; }
         public decimal HourlyRate { get; set; }
+        public decimal TotalPayment => HoursWorked * HourlyRate;
 
-        public string Notes { get; set; }
+        // Add this property
         public string Status { get; set; } = "Pending";
-
-        // Calculated property for Total Amount
-        public decimal TotalAmount
-        {
-            get
-            {
-                return HoursWorked * HourlyRate;
-            }
-        }
-
-        // New property for the submission date
-        public DateTime SubmissionDate { get; set; } = DateTime.Now;
     }
 }
